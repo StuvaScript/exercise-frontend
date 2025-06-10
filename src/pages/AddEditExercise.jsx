@@ -1,9 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
 export default function AddEditExercise() {
-  {
-    /* //todo **`` Trying to get state from the Dashboard component */
-  }
   const location = useLocation();
   const data = location.state;
   return (

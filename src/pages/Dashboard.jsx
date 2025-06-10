@@ -9,8 +9,6 @@ export default function Dashboard() {
         <button>Add Exercise</button>
       </Link>
 
-      {/* //todo **`` Trying to pass state to the AddEditExercise component */}
-
       <Link to="/add-edit-exercise" state="edit">
         <button>Edit</button>
       </Link>
