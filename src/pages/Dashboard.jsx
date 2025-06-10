@@ -11,7 +11,7 @@ export default function Dashboard() {
 
       {/* //todo **`` Trying to pass state to the AddEditExercise component */}
 
-      <Link to={{ pathname: "/add-edit-exercise", state: "edit" }}>
+      <Link to="/add-edit-exercise" state="edit">
         <button>Edit</button>
       </Link>
       <button>Delete</button>

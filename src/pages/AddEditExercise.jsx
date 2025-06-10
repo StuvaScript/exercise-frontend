@@ -5,12 +5,11 @@ export default function AddEditExercise() {
     /* //todo **`` Trying to get state from the Dashboard component */
   }
   const location = useLocation();
-  console.log("location:", location);
   const data = location.state;
-  console.log("data:", data);
   return (
     <>
-      <h2>I am the AddEditExercise page: {data}</h2>
+      <h2>I am the AddEditExercise page</h2>
+      <p>{data === "edit" ? "Edit form" : "Add form"}</p>
       <Link to={"/dashboard"}>
         <button>AddEdit Exercise</button>
       </Link>
