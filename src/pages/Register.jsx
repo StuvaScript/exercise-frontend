@@ -10,20 +10,28 @@ export default function Register() {
     pass2: "",
   });
 
+  const [error, setError] = useState({
+    error: false,
+    msg: "",
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInputs((values) => ({ ...values, [name]: value }));
   };
-
-  // todo **`` Set up an error state and if its true, display the error message. (passwords don't match and invalid email)
 
   // todo **`` Set up a redirect on successful registration
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setError({
+      error: false,
+      msg: "",
+    });
+
     if (formInputs.pass1 !== formInputs.pass2) {
-      console.error("Passwords don't match!!");
+      setError({ error: true, msg: "Passwords don't match" });
     } else {
       try {
         const response = await axios.post(
@@ -51,8 +59,7 @@ export default function Register() {
           });
         }
       } catch (err) {
-        console.error(err);
-        console.error(err.response.data.msg);
+        setError({ error: true, msg: `${err.response.data.msg}` });
       }
     }
   };
@@ -110,6 +117,7 @@ export default function Register() {
           <button type="button">Cancel</button>
         </Link>
       </form>
+      <p>{error && error.msg}</p>
     </>
   );
 }
