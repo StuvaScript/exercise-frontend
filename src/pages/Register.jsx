@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Register() {
@@ -10,20 +10,28 @@ export default function Register() {
     pass2: "",
   });
 
+  const [error, setError] = useState({
+    value: false,
+    msg: "",
+  });
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInputs((values) => ({ ...values, [name]: value }));
   };
 
-  // todo **`` Set up an error state and if its true, display the error message. (passwords don't match and invalid email)
-
-  // todo **`` Set up a redirect on successful registration
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setError({
+      value: false,
+      msg: "",
+    });
+
     if (formInputs.pass1 !== formInputs.pass2) {
-      console.error("Passwords don't match!!");
+      setError({ value: true, msg: "Passwords don't match" });
     } else {
       try {
         const response = await axios.post(
@@ -49,10 +57,11 @@ export default function Register() {
             pass1: "",
             pass2: "",
           });
+
+          navigate("/dashboard");
         }
       } catch (err) {
-        console.error(err);
-        console.error(err.response.data.msg);
+        setError({ value: true, msg: `${err.response.data.msg}` });
       }
     }
   };
@@ -110,6 +119,7 @@ export default function Register() {
           <button type="button">Cancel</button>
         </Link>
       </form>
+      {error.value && <p>{error.msg}</p>}
     </>
   );
 }
