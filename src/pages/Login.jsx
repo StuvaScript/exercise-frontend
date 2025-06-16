@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function Login() {
+export default function Login({ family }) {
   const [formInputs, setFormInputs] = useState({
     email: "",
     pass: "",
@@ -59,7 +59,7 @@ export default function Login() {
 
   return (
     <>
-      <h2>I am the Login page</h2>
+      <h2>I am the Login page {family}</h2>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">email: </label>
