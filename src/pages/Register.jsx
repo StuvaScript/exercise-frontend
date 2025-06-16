@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import AuthContext from "../context/AuthContext";
+import { postRequest } from "../HTTPRequests";
 
 export default function Register() {
   const [formInputs, setFormInputs] = useState({
@@ -35,22 +35,15 @@ export default function Register() {
     if (formInputs.pass1 !== formInputs.pass2) {
       setError({ value: true, msg: "Passwords don't match" });
     } else {
-      try {
-        const response = await axios.post(
-          "/api/v1/auth/register",
-          {
-            name: formInputs.name,
-            email: formInputs.email,
-            password: formInputs.pass1,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+      const url = "/api/v1/auth/register";
+      const body = {
+        name: formInputs.name,
+        email: formInputs.email,
+        password: formInputs.pass1,
+      };
 
-        console.log("response:", response);
+      try {
+        const response = await postRequest(url, body);
 
         if (response.status === 201) {
           setFormInputs({
