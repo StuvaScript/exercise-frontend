@@ -7,20 +7,23 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AddEditExercise from "./pages/AddEditExercise";
 import PageNotFound from "./pages/PageNotFound";
+import AuthProvider from "./context/AuthProvider";
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="add-edit-exercise" element={<AddEditExercise />} />
-        </Route>
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="add-edit-exercise" element={<AddEditExercise />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }

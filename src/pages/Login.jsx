@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 export default function Login({ family }) {
   const [formInputs, setFormInputs] = useState({
@@ -14,6 +15,7 @@ export default function Login({ family }) {
   });
 
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +52,12 @@ export default function Login({ family }) {
           pass: "",
         });
 
+        const {
+          user: { name },
+          token,
+        } = response.data;
+
+        login(name, token);
         navigate("/dashboard");
       }
     } catch (err) {
