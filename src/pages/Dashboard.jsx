@@ -6,7 +6,6 @@ import Exercise from "../components/Exercise";
 
 export default function Dashboard() {
   const [exercises, setExercises] = useState([]);
-  console.log("exercises:", exercises);
 
   const { token } = useContext(AuthContext);
   const url = "/api/v1/exercises";

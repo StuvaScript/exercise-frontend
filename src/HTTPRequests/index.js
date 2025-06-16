@@ -1,4 +1,5 @@
 import getRequest from "./get";
+import patchRequest from "./patch";
 import postRequest from "./post";
 
-export { postRequest, getRequest };
+export { postRequest, getRequest, patchRequest };

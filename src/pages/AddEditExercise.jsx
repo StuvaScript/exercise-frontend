@@ -1,25 +1,34 @@
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { postRequest } from "../HTTPRequests";
+import { patchRequest, postRequest } from "../HTTPRequests";
 import AuthContext from "../context/AuthContext";
 
 export default function AddEditExercise() {
-  const [formInputs, setFormInputs] = useState({
-    name: "",
-    reps: "",
-    sets: "",
-    measurement: "",
-    measurementUnit: "",
+  const location = useLocation();
+  const exerciseID = location.state?.id || null;
+  console.log("location.state:", location.state);
+
+  const [formInputs, setFormInputs] = useState(() => {
+    const state = location.state ?? {};
+
+    const removeNull = (value) => (value === null ? "" : value);
+
+    return {
+      name: removeNull(state.name),
+      reps: removeNull(state.reps),
+      sets: removeNull(state.sets),
+      measurement: removeNull(state.measurement),
+      measurementUnit: removeNull(state.measurementUnit),
+    };
   });
 
+  console.log("formInputs:", formInputs);
   const [error, setError] = useState({
     value: false,
     msg: "",
   });
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const data = location.state;
   const { token } = useContext(AuthContext);
 
   const handleChange = (e) => {
@@ -35,20 +44,24 @@ export default function AddEditExercise() {
       msg: "",
     });
 
-    const url = "/api/v1/exercises";
+    const url = exerciseID
+      ? `/api/v1/exercises/${exerciseID}`
+      : "/api/v1/exercises";
+
     const body = {
       name: formInputs.name,
       reps: formInputs.reps,
       sets: formInputs.sets,
       measurement: formInputs.measurement,
-      measurementUnit: formInputs.name,
+      measurementUnit: formInputs.measurementUnit,
     };
 
     try {
-      const response = await postRequest(url, body, token);
+      const response = exerciseID
+        ? await patchRequest(url, body, token)
+        : await postRequest(url, body, token);
 
-      console.log("response:", response);
-      if (response.status === 201) {
+      if (response.status === 200 || response.status === 201) {
         setFormInputs({
           name: "",
           reps: "",
@@ -67,7 +80,7 @@ export default function AddEditExercise() {
   return (
     <>
       <h2>I am the AddEditExercise page</h2>
-      <p>{data === "edit" ? "Edit form" : "Add form"}</p>
+      <p>{exerciseID ? "Edit form" : "Add form"}</p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">name: </label>
         <input
@@ -124,7 +137,7 @@ export default function AddEditExercise() {
         <br />
 
         <button type="submit">
-          {data === "edit" ? "Edit exercise" : "Add exercise"}
+          {exerciseID ? "Edit exercise" : "Add exercise"}
         </button>
 
         <Link to="/dashboard">

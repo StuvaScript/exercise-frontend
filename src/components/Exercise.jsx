@@ -6,11 +6,21 @@ export default function Exercise({
   reps,
   measurement,
   measurementUnit,
+  _id,
 }) {
+  const exerciseData = {
+    name,
+    sets,
+    reps,
+    measurement,
+    measurementUnit,
+    id: _id,
+  };
+
   return (
     <div>
       {name}, {sets}, {reps}, {measurement}, {measurementUnit}
-      <Link to="/add-edit-exercise" state="edit">
+      <Link to="/add-edit-exercise" state={exerciseData}>
         <button>Edit</button>
       </Link>
       <button>Delete</button>
