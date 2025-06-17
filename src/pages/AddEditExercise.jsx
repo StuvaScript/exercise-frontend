@@ -6,23 +6,22 @@ import AuthContext from "../context/AuthContext";
 export default function AddEditExercise() {
   const location = useLocation();
   const exerciseID = location.state?.id || null;
-  console.log("location.state:", location.state);
 
   const [formInputs, setFormInputs] = useState(() => {
     const state = location.state ?? {};
 
-    const removeNull = (value) => (value === null ? "" : value);
+    const sanitizeValue = (value) =>
+      value === null || value === undefined ? "" : value;
 
     return {
-      name: removeNull(state.name),
-      reps: removeNull(state.reps),
-      sets: removeNull(state.sets),
-      measurement: removeNull(state.measurement),
-      measurementUnit: removeNull(state.measurementUnit),
+      name: sanitizeValue(state.name),
+      reps: sanitizeValue(state.reps),
+      sets: sanitizeValue(state.sets),
+      measurement: sanitizeValue(state.measurement),
+      measurementUnit: sanitizeValue(state.measurementUnit),
     };
   });
 
-  console.log("formInputs:", formInputs);
   const [error, setError] = useState({
     value: false,
     msg: "",

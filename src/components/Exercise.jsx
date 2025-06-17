@@ -7,6 +7,7 @@ export default function Exercise({
   measurement,
   measurementUnit,
   _id,
+  onDelete,
 }) {
   const exerciseData = {
     name,
@@ -23,7 +24,7 @@ export default function Exercise({
       <Link to="/add-edit-exercise" state={exerciseData}>
         <button>Edit</button>
       </Link>
-      <button>Delete</button>
+      <button onClick={() => onDelete(_id)}>Delete</button>
     </div>
   );
 }
