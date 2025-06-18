@@ -11,9 +11,18 @@ export default function Header() {
       <Link to="/">
         <button>Site logo</button>
       </Link>
+      <h1>I am the header. {user && `Hello ${user}`}</h1>
 
-      <h1>I am the header. Hello {user}</h1>
-
+      {user && (
+        <Link to="/">
+          <button>Home</button>
+        </Link>
+      )}
+      {user && (
+        <Link to="/dashboard">
+          <button>Dashboard</button>
+        </Link>
+      )}
       {user ? <LogoutButton /> : <LoginRegisterButtons />}
     </>
   );

@@ -20,7 +20,11 @@ export default function Exercise({
 
   return (
     <div>
-      {name}, {sets}, {reps}, {measurement}, {measurementUnit}
+      <span>{name}</span>
+      <span>{sets}</span>
+      <span>{reps}</span>
+      <span>{measurement}</span>
+      <span>{measurementUnit}</span>
       <Link to="/add-edit-exercise" state={exerciseData}>
         <button>Edit</button>
       </Link>

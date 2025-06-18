@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { deleteRequest, getRequest } from "../HTTPRequests";
 import { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
-import Exercise from "../components/Exercise";
+import ExerciseContainer from "../components/ExerciseContainer";
 
 export default function Dashboard() {
   const [exercises, setExercises] = useState([]);
@@ -23,8 +23,10 @@ export default function Dashboard() {
   }, [token]);
 
   useEffect(() => {
-    getExerciseData();
-  }, [getExerciseData]);
+    if (token) {
+      getExerciseData();
+    }
+  }, [token, getExerciseData]);
 
   const handleDelete = async (id) => {
     const url = `/api/v1/exercises/${id}`;
@@ -48,10 +50,9 @@ export default function Dashboard() {
         <button>Add Exercise</button>
       </Link>
 
-      {exercises.length > 0 &&
-        exercises.map((exercise) => (
-          <Exercise key={exercise._id} onDelete={handleDelete} {...exercise} />
-        ))}
+      {exercises.length > 0 && (
+        <ExerciseContainer handleDelete={handleDelete} exercises={exercises} />
+      )}
     </>
   );
 }
