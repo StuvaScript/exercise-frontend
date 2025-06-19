@@ -69,8 +69,8 @@ export default function Register() {
   };
 
   return (
-    <>
-      <h2>I am the Register page</h2>
+    <div>
+      <h2 className="test">I am the Register page</h2>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">name: </label>
@@ -122,6 +122,6 @@ export default function Register() {
         </Link>
       </form>
       {error.value && <p>{error.msg}</p>}
-    </>
+    </div>
   );
 }

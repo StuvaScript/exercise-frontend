@@ -59,8 +59,8 @@ export default function Login({ family }) {
   };
 
   return (
-    <>
-      <h2>I am the Login page {family}</h2>
+    <div>
+      <h2 className="test">I am the Login page {family}</h2>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">email: </label>
@@ -90,6 +90,6 @@ export default function Login({ family }) {
         </Link>
       </form>
       {error.value && <p>{error.msg}</p>}
-    </>
+    </div>
   );
 }

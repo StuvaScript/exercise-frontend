@@ -43,7 +43,7 @@ export default function Dashboard() {
   };
 
   return (
-    <>
+    <div>
       <h2>I am the Dashboard page</h2>
       <h3>Exercises</h3>
       <Link to="/add-edit-exercise">
@@ -53,6 +53,6 @@ export default function Dashboard() {
       {exercises.length > 0 && (
         <ExerciseContainer handleDelete={handleDelete} exercises={exercises} />
       )}
-    </>
+    </div>
   );
 }

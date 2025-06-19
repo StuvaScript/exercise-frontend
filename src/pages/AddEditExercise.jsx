@@ -77,9 +77,9 @@ export default function AddEditExercise() {
   };
 
   return (
-    <>
+    <div>
       <h2>I am the AddEditExercise page</h2>
-      <p>{exerciseID ? "Edit form" : "Add form"}</p>
+
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">name: </label>
         <input
@@ -144,6 +144,6 @@ export default function AddEditExercise() {
         </Link>
       </form>
       {error.value && <p>{error.msg}</p>}
-    </>
+    </div>
   );
 }
