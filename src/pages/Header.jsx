@@ -3,28 +3,35 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import LoginRegisterButtons from "../components/LoginRegisterButtons";
 import LogoutButton from "../components/LogoutButton";
-import style from "./Header.module.css";
+import styles from "./Header.module.css";
 
 export default function Header() {
   const { user } = useContext(AuthContext);
   return (
-    <div id={style.header}>
-      <Link to="/">
-        <button className={style.red}>Site logo</button>
-      </Link>
-      <h1>Flexecution {user && `Hello ${user}`}</h1>
-
-      {user && (
+    <div className={styles.header}>
+      <div className={styles["left-side-header"]}>
         <Link to="/">
-          <button>Home</button>
+          <button className={styles.logo}>Site logo</button>
         </Link>
-      )}
-      {user && (
-        <Link to="/dashboard">
-          <button>Dashboard</button>
-        </Link>
-      )}
-      {user ? <LogoutButton /> : <LoginRegisterButtons />}
+      </div>
+
+      <h1 className={styles.title}>Flexecution</h1>
+
+      <div className={styles["right-side-header"]}>
+        <div className={styles["upper-right-side-header"]}>
+          {user && <p className={styles["user-name"]}>Hello {user}</p>}
+
+          {user ? <LogoutButton /> : <LoginRegisterButtons />}
+        </div>
+
+        <div className={styles.navbar}>
+          {user && (
+            <>
+              <Link to="/">Home</Link> | <Link to="/dashboard">Dashboard</Link>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
