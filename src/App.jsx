@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import AddEditExercise from "./pages/AddEditExercise";
 import PageNotFound from "./pages/PageNotFound";
 import AuthProvider from "./context/AuthProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -18,8 +19,22 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="add-edit-exercise" element={<AddEditExercise />} />
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="add-edit-exercise"
+              element={
+                <ProtectedRoute>
+                  <AddEditExercise />
+                </ProtectedRoute>
+              }
+            />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

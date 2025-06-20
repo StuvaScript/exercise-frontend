@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import AuthContext from "../context/AuthContext";
+import { postRequest } from "../HTTPRequests";
 
 export default function Register() {
   const [formInputs, setFormInputs] = useState({
@@ -16,6 +17,7 @@ export default function Register() {
   });
 
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,22 +35,15 @@ export default function Register() {
     if (formInputs.pass1 !== formInputs.pass2) {
       setError({ value: true, msg: "Passwords don't match" });
     } else {
-      try {
-        const response = await axios.post(
-          "/api/v1/auth/register",
-          {
-            name: formInputs.name,
-            email: formInputs.email,
-            password: formInputs.pass1,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+      const url = "/api/v1/auth/register";
+      const body = {
+        name: formInputs.name,
+        email: formInputs.email,
+        password: formInputs.pass1,
+      };
 
-        console.log("response:", response);
+      try {
+        const response = await postRequest(url, body);
 
         if (response.status === 201) {
           setFormInputs({
@@ -57,6 +52,13 @@ export default function Register() {
             pass1: "",
             pass2: "",
           });
+
+          const {
+            user: { name },
+            token,
+          } = response.data;
+
+          login(name, token);
 
           navigate("/dashboard");
         }
@@ -67,8 +69,8 @@ export default function Register() {
   };
 
   return (
-    <>
-      <h2>I am the Register page</h2>
+    <div>
+      <h2 className="test">I am the Register page</h2>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">name: </label>
@@ -120,6 +122,6 @@ export default function Register() {
         </Link>
       </form>
       {error.value && <p>{error.msg}</p>}
-    </>
+    </div>
   );
 }

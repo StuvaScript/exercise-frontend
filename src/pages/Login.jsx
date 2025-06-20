@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import AuthContext from "../context/AuthContext";
+import { postRequest } from "../HTTPRequests";
 
 export default function Login({ family }) {
   const [formInputs, setFormInputs] = useState({
@@ -30,21 +30,14 @@ export default function Login({ family }) {
       msg: "",
     });
 
-    try {
-      const response = await axios.post(
-        "/api/v1/auth/login",
-        {
-          email: formInputs.email,
-          password: formInputs.pass,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    const url = "/api/v1/auth/login";
+    const body = {
+      email: formInputs.email,
+      password: formInputs.pass,
+    };
 
-      console.log("response:", response);
+    try {
+      const response = await postRequest(url, body);
 
       if (response.status === 200) {
         setFormInputs({
@@ -66,8 +59,8 @@ export default function Login({ family }) {
   };
 
   return (
-    <>
-      <h2>I am the Login page {family}</h2>
+    <div>
+      <h2 className="test">I am the Login page {family}</h2>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">email: </label>
@@ -97,6 +90,6 @@ export default function Login({ family }) {
         </Link>
       </form>
       {error.value && <p>{error.msg}</p>}
-    </>
+    </div>
   );
 }
