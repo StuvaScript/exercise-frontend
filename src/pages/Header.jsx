@@ -9,28 +9,24 @@ export default function Header() {
   const { user } = useContext(AuthContext);
   return (
     <div className={styles.header}>
-      <div className={styles["left-side-header"]}>
-        <Link to="/">
-          <button className={styles.logo}>Site logo</button>
-        </Link>
+      <Link to="/" className={styles.logo}>
+        <button>Site logo</button>
+      </Link>
+
+      <div className={styles["upper-right-side-header"]}>
+        {user && <p className={styles["user-name"]}>Hello {user}</p>}
+
+        {user ? <LogoutButton /> : <LoginRegisterButtons />}
       </div>
 
       <h1 className={styles.title}>Flexecution</h1>
 
-      <div className={styles["right-side-header"]}>
-        <div className={styles["upper-right-side-header"]}>
-          {user && <p className={styles["user-name"]}>Hello {user}</p>}
-
-          {user ? <LogoutButton /> : <LoginRegisterButtons />}
-        </div>
-
-        <div className={styles.navbar}>
-          {user && (
-            <>
-              <Link to="/">Home</Link> | <Link to="/dashboard">Dashboard</Link>
-            </>
-          )}
-        </div>
+      <div className={styles.navbar}>
+        {user && (
+          <>
+            <Link to="/">Home</Link> | <Link to="/dashboard">Dashboard</Link>
+          </>
+        )}
       </div>
     </div>
   );
