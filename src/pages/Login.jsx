@@ -2,8 +2,9 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { postRequest } from "../HTTPRequests";
+import styles from "./LoginRegister.module.css";
 
-export default function Login({ family }) {
+export default function Login() {
   const [formInputs, setFormInputs] = useState({
     email: "",
     pass: "",
@@ -59,35 +60,46 @@ export default function Login({ family }) {
   };
 
   return (
-    <div>
-      <h2 className="test">I am the Login page {family}</h2>
+    <div className={styles["form-page"]}>
+      <h2>Log In</h2>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">email: </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={formInputs.email}
-          onChange={handleChange}
-          required
-        />
-        <br />
-        <label htmlFor="pass">password: </label>
-        <input
-          type="password"
-          name="pass"
-          id="pass"
-          value={formInputs.pass}
-          onChange={handleChange}
-          required
-        />
-        <br />
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles["input-group"]}>
+          <div className={styles["label-and-input"]}>
+            <label htmlFor="email">
+              Email <span className={styles.required}>*</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={formInputs.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <button type="submit">Login</button>
-        <Link to="/">
-          <button type="button">Cancel</button>
-        </Link>
+          <div className={styles["label-and-input"]}>
+            <label htmlFor="pass">
+              Password <span className={styles.required}>*</span>
+            </label>
+            <input
+              type="password"
+              name="pass"
+              id="pass"
+              value={formInputs.pass}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div className={styles.buttons}>
+          <button type="submit">Log In</button>
+          <Link to="/">
+            <button type="button">Cancel</button>
+          </Link>
+        </div>
       </form>
       {error.value && <p>{error.msg}</p>}
     </div>

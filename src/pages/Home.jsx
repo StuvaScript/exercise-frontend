@@ -1,7 +1,10 @@
+import styles from "./Home.module.css";
+
 export default function Home() {
   return (
-    <div>
-      <h2>I am the Home page</h2>
+    <div className={styles.home}>
+      <h2>Welcome!!</h2>
+      <p>This is your one stop shop to track all your excerises</p>
     </div>
   );
 }

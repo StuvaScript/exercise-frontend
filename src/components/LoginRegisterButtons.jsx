@@ -5,7 +5,7 @@ export default function LoginRegisterButtons() {
   return (
     <div className={styles["button-group"]}>
       <Link to="/login">
-        <button>Log in</button>
+        <button>Log In</button>
       </Link>
 
       <Link to="/register">
