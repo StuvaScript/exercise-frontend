@@ -3,7 +3,7 @@
   grid-template-rows: 1fr 1fr auto;
   grid-template-columns: auto 1fr auto;
 
-  background: rgb(125, 255, 125);
+  background: var(--main-color);
   padding: 20px;
   height: 100%;
 
