@@ -1,0 +1,18 @@
+.dashboard {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 20px;
+  justify-content: center;
+
+  padding: 20px 10px;
+
+  .title {
+    justify-self: center;
+  }
+
+  .h3-and-add-button {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}

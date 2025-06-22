@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { patchRequest, postRequest } from "../HTTPRequests";
 import AuthContext from "../context/AuthContext";
+import styles from "./FormStyling.module.css";
 
 export default function AddEditExercise() {
   const location = useLocation();
@@ -77,71 +78,86 @@ export default function AddEditExercise() {
   };
 
   return (
-    <div>
-      <h2>I am the AddEditExercise page</h2>
+    <div className={styles["form-page"]}>
+      <h2>{exerciseID ? "Edit Exercise" : "Add Exercise"}</h2>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">name: </label>
-        <input
-          name="name"
-          id="name"
-          value={formInputs.name}
-          onChange={handleChange}
-          required
-        />
-        <br />
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles["input-group"]}>
+          <div className={styles["label-and-input"]}>
+            <label htmlFor="name">
+              Name <span className={styles.required}>*</span>
+            </label>
+            <input
+              name="name"
+              id="name"
+              value={formInputs.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <label htmlFor="sets">sets: </label>
-        <input
-          name="sets"
-          id="sets"
-          type="number"
-          min={0}
-          value={formInputs.sets}
-          onChange={handleChange}
-        />
-        <br />
+          <div className={styles["label-and-input"]}>
+            <label htmlFor="sets">Sets </label>
+            <input
+              name="sets"
+              id="sets"
+              type="number"
+              min={0}
+              value={formInputs.sets}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="reps">reps: </label>
-        <input
-          name="reps"
-          id="reps"
-          type="number"
-          min={0}
-          value={formInputs.reps}
-          onChange={handleChange}
-        />
-        <br />
+          <div className={styles["label-and-input"]}>
+            <label htmlFor="reps">Reps </label>
+            <input
+              name="reps"
+              id="reps"
+              type="number"
+              min={0}
+              value={formInputs.reps}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="measurement">measurement: </label>
-        <input
-          name="measurement"
-          id="measurement"
-          type="number"
-          min={0}
-          value={formInputs.measurement}
-          onChange={handleChange}
-          required
-        />
-        <br />
+          <div className={styles["label-and-input"]}>
+            <label htmlFor="measurement">
+              Measurement <span className={styles.required}>*</span>
+            </label>
+            <input
+              name="measurement"
+              id="measurement"
+              type="number"
+              min={0}
+              value={formInputs.measurement}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <label htmlFor="measurementUnit">measurement Unit: </label>
-        <input
-          name="measurementUnit"
-          id="measurementUnit"
-          value={formInputs.measurementUnit}
-          onChange={handleChange}
-          required
-        />
-        <br />
+          <div className={styles["label-and-input"]}>
+            <label htmlFor="measurementUnit">
+              Measurement Unit <span className={styles.required}>*</span>
+            </label>
+            <input
+              name="measurementUnit"
+              id="measurementUnit"
+              value={formInputs.measurementUnit}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <button type="submit">
-          {exerciseID ? "Edit exercise" : "Add exercise"}
-        </button>
+          <div className={styles.buttons}>
+            <button type="submit">
+              {exerciseID ? "Edit Exercise" : "Add Exercise"}
+            </button>
 
-        <Link to="/dashboard">
-          <button type="button">Cancel</button>
-        </Link>
+            <Link to="/dashboard">
+              <button type="button">Cancel</button>
+            </Link>
+          </div>
+        </div>
       </form>
       {error.value && <p>{error.msg}</p>}
     </div>

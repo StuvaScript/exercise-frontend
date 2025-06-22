@@ -1,0 +1,40 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+
+  width: fit-content;
+  margin-bottom: 10vw;
+
+  .titles-row {
+    margin-bottom: 10px;
+    text-align: center;
+
+    .column-title {
+      border: 1px solid #000;
+      background: rgb(233, 230, 233);
+    }
+  }
+
+  div {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: subgrid;
+    align-content: center;
+
+    span {
+      align-content: center;
+
+      border: 1px solid #000;
+      border-radius: 2px;
+      padding: 0 5px;
+      background: linear-gradient(175deg, white, rgb(113, 230, 113));
+    }
+
+    /* **`` These are the exercise row buttons */
+    span:last-child {
+      background: initial;
+      border: none;
+    }
+  }
+}

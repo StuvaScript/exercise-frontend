@@ -13,13 +13,11 @@
     gap: 20px;
 
     .input-group {
-      /* background: red; */
       display: flex;
       flex-direction: column;
       gap: 10px;
 
       .label-and-input {
-        /* background: green; */
         display: flex;
         flex-direction: column;
         gap: 2px;
@@ -27,6 +25,8 @@
     }
 
     .buttons {
+      align-self: center;
+
       display: flex;
       gap: 10px;
     }

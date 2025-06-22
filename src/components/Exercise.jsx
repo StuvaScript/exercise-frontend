@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import styles from "./Exercise.module.css";
 
 export default function Exercise({
   name,
@@ -25,10 +26,12 @@ export default function Exercise({
       <span>{reps}</span>
       <span>{measurement}</span>
       <span>{measurementUnit}</span>
-      <Link to="/add-edit-exercise" state={exerciseData}>
-        <button>Edit</button>
-      </Link>
-      <button onClick={() => onDelete(_id)}>Delete</button>
+      <span className={styles["row-buttons"]}>
+        <Link to="/add-edit-exercise" state={exerciseData}>
+          <button>Edit</button>
+        </Link>
+        <button onClick={() => onDelete(_id)}>Delete</button>
+      </span>
     </div>
   );
 }

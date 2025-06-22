@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { postRequest } from "../HTTPRequests";
-import styles from "./LoginRegister.module.css";
+import styles from "./FormStyling.module.css";
 
 export default function Register() {
   const [formInputs, setFormInputs] = useState({
