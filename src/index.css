@@ -1,3 +1,48 @@
+:root {
+  --main-color: #62c462;
+  --accent-color: #db80ff;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background: #f7f7f7;
+  color: #111111;
+
+  button {
+    cursor: pointer;
+    min-height: 40px;
+    background: var(--accent-color);
+    border-radius: 10px;
+    padding: 0 20px;
+    transition: all 100ms;
+
+    &:hover {
+      filter: brightness(85%);
+    }
+
+    &:active {
+      transform: translate(1px, 1px);
+    }
+  }
+
+  a,
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    color: black;
+    text-decoration: underline transparent;
+    transition: text-decoration-color 200ms;
+  }
+
+  a:hover {
+    text-decoration-color: black;
+  }
+
+  h2 {
+    font-size: 3rem;
+    font-family: "Condiment", cursive;
+    text-shadow: 2px 2px 2px var(--accent-color), 3px 3px black;
+    letter-spacing: 0.3rem;
+  }
 }

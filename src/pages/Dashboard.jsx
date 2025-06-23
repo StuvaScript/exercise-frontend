@@ -3,11 +3,12 @@ import { deleteRequest, getRequest } from "../HTTPRequests";
 import { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import ExerciseContainer from "../components/ExerciseContainer";
+import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
   const [exercises, setExercises] = useState([]);
 
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
 
   const getExerciseData = useCallback(async () => {
     const url = "/api/v1/exercises";
@@ -43,12 +44,15 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
-      <h2>I am the Dashboard page</h2>
-      <h3>Exercises</h3>
-      <Link to="/add-edit-exercise">
-        <button>Add Exercise</button>
-      </Link>
+    <div className={styles.dashboard}>
+      <h2 className={styles.title}>Dashboard</h2>
+
+      <div className={styles["h3-and-add-button"]}>
+        <h3>{user}'s Exercises</h3>
+        <Link to="/add-edit-exercise">
+          <button>Add Exercise</button>
+        </Link>
+      </div>
 
       {exercises.length > 0 && (
         <ExerciseContainer handleDelete={handleDelete} exercises={exercises} />

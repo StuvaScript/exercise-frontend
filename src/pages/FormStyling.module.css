@@ -1,0 +1,38 @@
+.form-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 10vw;
+  gap: 20px;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .label-and-input {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+    }
+
+    .buttons {
+      align-self: center;
+
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  .required {
+    color: red;
+  }
+}
