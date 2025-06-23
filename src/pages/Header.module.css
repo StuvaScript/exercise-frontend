@@ -35,7 +35,7 @@
     align-self: center;
 
     margin: 0;
-    font-size: clamp(32px, 8vw, 100px);
+    font-size: clamp(60px, 8vw, 100px);
   }
 
   .navbar {
