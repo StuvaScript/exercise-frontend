@@ -1,10 +1,12 @@
 :root {
-  --main-color: rgb(125, 255, 125);
-  --accent-color: rgb(222, 160, 241);
+  --main-color: #62c462;
+  --accent-color: #db80ff;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background: #f7f7f7;
+  color: #111111;
 
   button {
     cursor: pointer;
@@ -39,5 +41,8 @@ body {
 
   h2 {
     font-size: 3rem;
+    font-family: "Condiment", cursive;
+    text-shadow: 2px 2px 2px var(--accent-color), 3px 3px black;
+    letter-spacing: 0.3rem;
   }
 }
